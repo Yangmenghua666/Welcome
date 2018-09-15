@@ -1,0 +1,30 @@
+<template name="postCommentItemTpl">
+   <view class='comment-item'>
+      <view class='comment-item-header'>
+        <view class='left-img'>
+          <image src="{{avatar}}"></image>
+        </view>
+        <view class='right-user'>
+          <text class='user-name'>{{username}}</text>
+        </view>
+      </view>
+
+      <view class='comment-body'>
+        <view class='comment-txt' wx:if="{{content.txt}}">
+            <text>{{content.txt}}</text>
+        </view>
+        <view class='comment-voice' wx:if="{{content.audio && content.audio.url}}">
+            <view class='comment-voice-item' data-url="{{content.audio.url}}" catchtap='playAudio'>
+                <image src='/images/icon/wx_app_voice.png' class='voice-play'></image>
+                <text>{{content.audio.timeLen}}</text>
+            </view>
+        </view>
+        <view class='comment-img' wx:if="{{content.img.length != 0 }}">
+          <block wx:key="commentsImg" wx:for="{{content.img}}" wx:for-item="img" wx:for-index='imgIdx'>
+            <image src='{{img}}' mode='aspectFill' catchtap='previewImg' data-comment-idx='{{idx}}' data-comment-idx='{{imgIdx}}'></image>
+          </block>
+        </view>
+      </view>
+      <view class='comment-time'>{{create_time}}</view>
+    </view>
+</template>
